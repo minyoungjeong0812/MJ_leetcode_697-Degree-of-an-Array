@@ -1,0 +1,21 @@
+def findShortestSubArray(nums):
+    ## Declare empty dictionary
+    C = {}
+    
+    ## enumerate over "nums" ##
+    for i, n in enumerate(nums):
+        
+        ## Creating key-value pair. (n is being the key). Value is saved as a list
+        if n in C:
+            C[n].append(i)
+        else:
+            ## Creatating [i] if the dictionary did not have "n"
+            C[n] = [i]
+    
+    ##Get the maximum frequency##
+    M = max([len(i) for i in C.values()])
+    
+    ## Get the minimum distance +1 for those lists that had the maximum occurence frequency ##
+    return min([i[-1] - i[0] for i in C.values() if len(i) == M]) + 1
+
+print(findShortestSubArray([1,2,2,3,1]))
